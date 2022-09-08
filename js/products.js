@@ -1,8 +1,14 @@
-let cars = [];
-function cars_list(array) {
+let originalProductList = [];
+let productList = [];
+let minCount = undefined;
+let maxCount = undefined;
+
+function product_list() {
 let htmlContentToAppend = "";
-    for (let i = 0; i < array.products.length; i++) {
-        let products = array.products[i];
+    for (let products of productList) {
+
+        if (((minCount == undefined) || (minCount != undefined && parseInt(products.cost) >= minCount)) &&
+        ((maxCount == undefined) || (maxCount != undefined && parseInt(products.cost) <= maxCount))){
 
         htmlContentToAppend += `
     
@@ -23,14 +29,73 @@ let htmlContentToAppend = "";
         </div>
     `
  }
-    document.getElementById('autos').innerHTML += htmlContentToAppend;
+    document.getElementById('prod-list-container').innerHTML = htmlContentToAppend;
+}
 }
 
+
+
 document.addEventListener("DOMContentLoaded", function (e) {
-    getJSONData(CAR_PRODUCTS).then(function (resultObj) {
-        if (resultObj.status === "ok") {
-            cars = resultObj.data;
-            cars_list(cars);
+    getJSONData(URL_PRODUCTS).then(function(resultObj) {
+        if (resultObj.status === "ok") 
+        productList = resultObj.data.products;
+        {
+
+           products = resultObj.data;
+            product_list(products);
         }
+        product_list();
     });
+
+
+
+document.getElementById("sortAsc").addEventListener("click", () => {
+    productList.sort(function(a, b) {
+        if ( a.cost < b.cost ){ return -1; }
+        if ( a.cost > b.cost ){ return 1; }
+        return 0;
+    });
+    
+    product_list();
 });
+
+document.getElementById("sortDesc").addEventListener("click", () => {
+    productList.sort(function(a, b) {
+        if ( a.cost > b.cost ){ return -1; }
+        if ( a.cost < b.cost ){ return 1; }
+        return 0;
+    });
+    product_list();
+});
+
+document.getElementById("sortByCount").addEventListener("click", () => {
+    productList.sort(function(a, b) {
+        if ( a.soldCount > b.soldCount ){ return -1; }
+        if ( a.soldCount < b.soldCount ){ return 1; }
+        return 0;
+    });
+    product_list();
+});
+
+
+document.getElementById("filterCount").addEventListener("click", () =>{
+    minCount = document.getElementById("filterCountMin").value;
+    maxCount = document.getElementById("filterCountMax").value;
+    if ((minCount != undefined) && (minCount != "") && (parseInt(minCount)) >= 0){
+        minCount = parseInt(minCount);
+    }
+    else{
+        minCount = undefined;
+    }
+
+    if ((maxCount != undefined) && (maxCount != "") && (parseInt(maxCount)) >= 0){
+        maxCount = parseInt(maxCount);
+    }
+    else{
+        maxCount = undefined;
+    }
+
+    product_list();
+});
+});
+

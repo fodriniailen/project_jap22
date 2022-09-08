@@ -4,6 +4,7 @@ var parrafo = document.getElementById("warning")
 var form = document.getElementById("mi-form")
 
 form.addEventListener("submit", e=>{
+    /* It prevents the default action of the event. */
     e.preventDefault()
     let warnings = ""
     let entrar = false
@@ -16,15 +17,18 @@ form.addEventListener("submit", e=>{
     }
 
     if(pass.value.length < 8){
-        warnings += `La contraseña no es válida <br>`
+        warnings 
+        += `La contraseña no es válida <br>`
         entrar = true
     }
 
     if(entrar){
         parrafo.innerHTML = warnings
     }else{
+        localStorage.setItem('userEmail',JSON.stringify(correo.value));
         window.location.href="home.html"
         parrafo.innerHTML = "Enviado"
     }
     
+
 })
