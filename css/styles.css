@@ -192,3 +192,8 @@ a.custom-card:hover {
 #formulario{
   text-align: center;
 }
+
+.img-container{
+  display: flex;
+  width: 250px;
+}

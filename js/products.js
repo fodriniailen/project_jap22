@@ -2,6 +2,13 @@ let originalProductList = [];
 let productList = [];
 let minCount = undefined;
 let maxCount = undefined;
+let divProd = document.getElementById('prod-list-container');
+
+
+function setProdID(id){
+    localStorage.setItem("prodID", id);
+    window.location = 'product-info.html';
+}
 
 function product_list() {
 let htmlContentToAppend = "";
@@ -11,8 +18,8 @@ let htmlContentToAppend = "";
         ((maxCount == undefined) || (maxCount != undefined && parseInt(products.cost) <= maxCount))){
 
         htmlContentToAppend += `
-    
-        <div class="list-group-item list-group-item-action">
+        <div onclick="setProdID(${products.id})" 
+        <div class="list-group-item list-group-item-action cursor-active">
         <div class="row">
         <div class="col-3">
             <img src=${products.image}  class="img-thumbnail">
@@ -29,10 +36,10 @@ let htmlContentToAppend = "";
         </div>
     `
  }
-    document.getElementById('prod-list-container').innerHTML = htmlContentToAppend;
+    let divProd = document.getElementById('prod-list-container');
+    divProd.innerHTML = htmlContentToAppend;
 }
-}
-
+};
 
 
 document.addEventListener("DOMContentLoaded", function (e) {
