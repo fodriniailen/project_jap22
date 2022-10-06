@@ -197,3 +197,38 @@ a.custom-card:hover {
   display: flex;
   width: 250px;
 }
+.drop-user{
+  color: rgb(255, 255, 255);
+  background-color: #212529;
+  border: #212529;
+  
+}
+.dropdown {
+  display: inline-block;
+  position: relative;
+  
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  width: 100%;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content a {
+  display: block;
+  color: #000000;
+  padding: 5px;
+  text-decoration: none;
+  background-color: #eff0f0;
+}
+.dropdown-content a:hover {
+color: #fff;
+background-color: #c6caca;
+}

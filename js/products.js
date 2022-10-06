@@ -18,7 +18,7 @@ let htmlContentToAppend = "";
         ((maxCount == undefined) || (maxCount != undefined && parseInt(products.cost) <= maxCount))){
 
         htmlContentToAppend += `
-        <div onclick="setProdID(${products.id})" 
+        <div onclick="setProdID(${products.id})">
         <div class="list-group-item list-group-item-action cursor-active">
         <div class="row">
         <div class="col-3">

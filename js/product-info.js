@@ -1,9 +1,12 @@
 
-function getProdID(id){
-    localStorage.getItem("prodID");
+function setProdID(id){
+    localStorage.setItem("prodID", id);
+    window.location = 'product-info.html';
 }
+
 let commentsArray = [];
 let currentProduct = [];
+let productosRelacionados="";
 
 
 function showProductsList(){
@@ -23,14 +26,15 @@ function showProductsList(){
     <h5><b>Cantidad de vendidos</b></h5>
          <p>${product.soldCount}</p>
     <h5><b>Imagenes ilustrativas</b></h5>
-       <div class="img-container">
-         <img src="${product.images[0]}" class="img-thumbnail">
-     
-         <img src="${product.images[1]}" class="img-thumbnail">
-     
-         <img src="${product.images[2]}" class="img-thumbnail">
-         <img src="${product.images[3]}" class="img-thumbnail">
-      </div>
+    <div class="img-container">
+    <img src="${product.images[0]}" class="img-thumbnail">
+
+    <img src="${product.images[1]}" class="img-thumbnail">
+
+    <img src="${product.images[2]}" class="img-thumbnail">
+    <img src="${product.images[3]}" class="img-thumbnail">
+ </div>
+
       <br>
       <h4>Comentarios</h4>
       `
@@ -39,6 +43,7 @@ function showProductsList(){
     }
 
 }
+
 
  function showComments(){
     let htmlContentToAppend = "";
@@ -55,15 +60,39 @@ function showProductsList(){
         <hr>
         <br>
 
-        </div>
-    
         `
 
         document.getElementById("comments-container").innerHTML = htmlContentToAppend;
-        console.log(comment);
+    
     }
 }
  }
+
+ function showRelatedProducts(){
+    let htmlContentToAppend ="";
+for (let i = 0; i < product.relatedProducts.length; i++) {
+        
+productosRelacionados=product.relatedProducts[i];
+console.log(productosRelacionados)
+    htmlContentToAppend += 
+    `
+    <div onclick="setProdID(${productosRelacionados.id})">
+    <div class="list-group-item list-group-item-action cursor-active">
+    
+    <div class="img-container">
+    <img src="${productosRelacionados.image}" class="img-fluid">
+    </div>
+    <p>${productosRelacionados.name}</p>
+    </div>
+    </div>
+    
+    `
+    document.getElementById("productos-relacionados").innerHTML = htmlContentToAppend;
+}
+ }
+
+
+
 
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(PRODUCT_INFO_URL).then(function(resultObj){
@@ -72,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         currentProduct = resultObj.data;
         {
            product = resultObj.data;
+           console.log(product);
            showProductsList(product) ;
         }
         showProductsList()
@@ -90,3 +120,16 @@ document.addEventListener("DOMContentLoaded", function (e){
         showComments()
     })
 })
+
+document.addEventListener("DOMContentLoaded", function(e){
+    getJSONData(PRODUCT_INFO_URL).then(function(resultObj){
+        
+        if (resultObj.status === "ok")
+        currentProduct = resultObj.data;
+        {
+           product = resultObj.data;
+        }
+       showRelatedProducts()
+    })
+});
+ 
