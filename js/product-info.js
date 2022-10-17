@@ -15,27 +15,50 @@ function showProductsList(){
         
     htmlContentToAppend +=  `
     <br> 
+
+    
+    <div class="contenedorinfo">
+    <div id="carouselControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="${product.images[0]}" class="d-block w-100" alt="IMG">
+      </div>
+      <div class="carousel-item">
+        <img src="${product.images[1]}" class="d-block w-100" alt="IMG1">
+      </div>
+      <div class="carousel-item">
+        <img src="${product.images[2]}" class="d-block w-100" alt="IMG2">
+      </div>
+      <div class="carousel-item">
+        <img src="${product.images[3]}" class="d-block w-100" alt="IMG3">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
+  </div>
+
+    <div class="contenedor-descripcion">
+    <button type="button" id="btn-buy" class="btn btn-success">Comprar</button>
     <h2>${product.name}</h2>
     <hr>
     <h5><b>Precio</b></h5>
-         <p>${product.currency} ${product.cost}</p>
+         <h1 class="text-cost"><b>${product.currency} ${product.cost}</b></h1>
+         <br>
     <h5><b>Descripción</b></h5>
          <p>${product.description}</p>
     <h5><b>Categoria</b></h5>
          <p>${product.category}</p>
     <h5><b>Cantidad de vendidos</b></h5>
          <p>${product.soldCount}</p>
-    <h5><b>Imagenes ilustrativas</b></h5>
-    <div class="img-container">
-    <img src="${product.images[0]}" class="img-thumbnail">
-
-    <img src="${product.images[1]}" class="img-thumbnail">
-
-    <img src="${product.images[2]}" class="img-thumbnail">
-    <img src="${product.images[3]}" class="img-thumbnail">
+    </div>
  </div>
 
-      <br>
       <h4>Comentarios</h4>
       `
 
@@ -76,6 +99,8 @@ productosRelacionados=product.relatedProducts[i];
 console.log(productosRelacionados)
     htmlContentToAppend += 
     `
+    
+    <div id="prod-relacionados">
     <div onclick="setProdID(${productosRelacionados.id})">
     <div class="list-group-item list-group-item-action cursor-active">
     
@@ -83,6 +108,7 @@ console.log(productosRelacionados)
     <img src="${productosRelacionados.image}" class="img-fluid">
     </div>
     <p>${productosRelacionados.name}</p>
+    </div>
     </div>
     </div>
     
@@ -113,6 +139,7 @@ document.addEventListener("DOMContentLoaded", function (e){
     getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(resultObj){
         if (resultObj.status === "ok")
         commentsArray = resultObj.data;
+        console.log(commentsArray)
         {
             comments = resultObj.data;
             showComments();

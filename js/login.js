@@ -4,7 +4,6 @@ var parrafo = document.getElementById("warning")
 var form = document.getElementById("mi-form")
 
 form.addEventListener("submit", e=>{
-    /* It prevents the default action of the event. */
     e.preventDefault()
     let warnings = ""
     let entrar = false

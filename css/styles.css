@@ -232,3 +232,39 @@ a.custom-card:hover {
 color: #fff;
 background-color: #c6caca;
 }
+
+.contenedorinfo{
+  display: flex ;
+}
+
+.contenedor-descripcion{
+  padding: 10px;
+}
+
+#prod-relacionados{
+  display: inline-block;
+
+}
+
+.text-cost{
+  color: #53c0fb;
+}
+
+.carousel{
+  width: 640px; 
+  height: 360px; 
+ }
+
+ #cart-img{
+  width: 70px;
+  height: 40px;
+ }
+
+ .contenedor {
+  display: flex;
+  flex-direction: column;
+}
+
+#btn-buy{
+ float: right;
+}

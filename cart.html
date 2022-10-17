@@ -37,10 +37,42 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+    <div class="container" id="cart-info">
+      
       </div>
+      <div class="container" id="formulario-envio">
+        <form>
+          <h4>Tipo de envío</h4>
+          <div>
+          <input type="radio" id="premium" value="premium" name="envio">
+          <label for="premium">Premium 2 a 5 días (15%)</label>
+          <br>
+          <input type="radio" id="express" value="express" name="envio">
+          <label for="express">Express 5 a 8 días (7%)</label>
+          <br>
+          <input type="radio" id="standard" value="standard" name="envio">
+          <label for="standard">Standard 12 a 15 días (5%)</label>
+          <hr>
+          <h5>Dirección de envío</h5>
+          <br>
+          <div class="input-group">
+            <span class="input-group-text">Calle</span>
+            <input type="text" aria-label="Calle" class="form-control">
+            <span class="input-group-text">Número</span>
+            <input type="text" aria-label="Numero" class="form-control">
+          </div>
+          <br>
+          <div class="input-group">
+            <span class="input-group-text">Esquina</span>
+            <input type="text" aria-label="Esquina" class="form-control">
+            <span class="input-group-text">Barrio</span>
+            <input type="text" aria-label="Barrio" class="form-control">
+          </div>
+          <hr>
+          
+          <button type="submit" class="btn btn-dark">Enviar</button>
+          </form>
+          </div>
     </div>
   </main>
   <footer class="text-muted">
