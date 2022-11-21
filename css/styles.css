@@ -189,24 +189,26 @@ a.custom-card:hover {
   color: orange;
 }
 
-#formulario{
+#formulario {
   text-align: center;
 }
 
-.img-container{
+.img-container {
   display: flex;
   width: 250px;
 }
-.drop-user{
+
+.drop-user {
   color: rgb(255, 255, 255);
   background-color: #212529;
   border: #212529;
-  
+
 }
+
 .dropdown {
   display: inline-block;
   position: relative;
-  
+
 }
 
 .dropdown-content {
@@ -214,7 +216,7 @@ a.custom-card:hover {
   position: absolute;
   width: 100%;
   overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
 .dropdown:hover .dropdown-content {
@@ -228,43 +230,54 @@ a.custom-card:hover {
   text-decoration: none;
   background-color: #eff0f0;
 }
+
 .dropdown-content a:hover {
-color: #fff;
-background-color: #c6caca;
+  color: #fff;
+  background-color: #c6caca;
 }
 
-.contenedorinfo{
-  display: flex ;
+.contenedorinfo {
+  display: flex;
 }
 
-.contenedor-descripcion{
+.contenedor-descripcion {
   padding: 10px;
 }
 
-#prod-relacionados{
+#prod-relacionados {
   display: inline-block;
 
 }
 
-.text-cost{
+.text-cost {
   color: #53c0fb;
 }
 
-.carousel{
-  width: 640px; 
-  height: 360px; 
- }
+.carousel {
+  width: 640px;
+  height: 360px;
+}
 
- #cart-img{
+#cart-img {
   width: 70px;
   height: 40px;
- }
+}
 
- .contenedor {
+.contenedor {
   display: flex;
   flex-direction: column;
 }
 
-#btn-buy{
- float: right;
+#btn-buy {
+  float: right;
+}
+
+form .contenido label {
+  display: block;
+}
+
+.disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+
 }

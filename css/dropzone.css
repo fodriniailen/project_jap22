@@ -4,7 +4,7 @@
  */
 .dropzone, .dropzone * {
   box-sizing: border-box; }
-
+  
 .dropzone {
   position: relative; }
   .dropzone .dz-preview {

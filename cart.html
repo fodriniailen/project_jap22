@@ -5,6 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>eMercado - Todo lo que busques está aquí</title>
+  <link rel="shortcut icon" href="img/shortcut.PNG">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -21,7 +22,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav w-100 justify-content-between">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
+            <a class="nav-link" href="home.html">Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="categories.html">Categorías</a>
@@ -38,13 +39,14 @@
   </nav>
   <main>
     <div class="container" id="cart-info">
-      
-      </div>
-      <div class="container" id="formulario-envio">
-        <form>
-          <h4>Tipo de envío</h4>
-          <div>
-          <input type="radio" id="premium" value="premium" name="envio">
+
+    </div>
+    <div class="container" id="formulario-envio">
+
+      <form action="" method="get" class="row g- needs-validation" name="formulario-de-envio" novalidate>
+        <h4>Tipo de envío</h4>
+        <div>
+          <input type="radio" id="premium" value="premium" name="envio" checked>
           <label for="premium">Premium 2 a 5 días (15%)</label>
           <br>
           <input type="radio" id="express" value="express" name="envio">
@@ -55,24 +57,133 @@
           <hr>
           <h5>Dirección de envío</h5>
           <br>
-          <div class="input-group">
+          <div class="col-md-4">
             <span class="input-group-text">Calle</span>
-            <input type="text" aria-label="Calle" class="form-control">
-            <span class="input-group-text">Número</span>
-            <input type="text" aria-label="Numero" class="form-control">
+            <input type="text" id="calle" aria-describedby="validationCalleFeedback" class="form-control" required>
+            <div class="invalid-feedback" id="validationCalleFeedback">
+              Debe ingresar la calle.
+            </div>
+            <br>
+            <div class="col-md-4">
+              <span class="input-group-text">Número</span>
+              <input type="text" id="numero" aria-describedby="validationNumberFeedback" class="form-control" required>
+              <div class="invalid-feedback" id="validationNumeroFeedback">
+                Debe ingresar el número.
+              </div>
+            </div>
+            <br>
+            <div class="col-md-6 ">
+              <span class="input-group-text">Esquina</span>
+              <input type="text" id="esquina" aria-describedby="validationEsquinaFeedback" class="form-control"
+                required>
+              <div class="invalid-feedback" id="validationEsquinaFeedback">
+                Debe ingresar la esquina.
+              </div>
+            </div>
           </div>
-          <br>
-          <div class="input-group">
-            <span class="input-group-text">Esquina</span>
-            <input type="text" aria-label="Esquina" class="form-control">
-            <span class="input-group-text">Barrio</span>
-            <input type="text" aria-label="Barrio" class="form-control">
+
+          <div>
+
+            <div class="alert alert-success" id="alert-buy" role="alert" hidden>
+              ¡Has comprado con éxito!
+            </div>
+
+            <hr>
+            <h4 class="mb-3">Costos</h4>
+            <ul class="list-group mb-3">
+              <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                  <h6 class="my-0">Subtotal</h6>
+                  <small class="text-muted">Costo unitario del producto por cantidad</small>
+                </div>
+                <input type="text" class="text-muted" id="productCost" oninput="calcular(this);" style="border: none;"
+                  readonly>
+
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                  <h6 class="my-0">Costo de envío</h6>
+                  <small class="text-muted">Según el tipo de envío</small>
+                </div>
+                <span class="text-muted" id="costoEnvioText">-</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>Total ($)</span>
+                <strong id="totalCostText">-</strong>
+              </li>
+            </ul>
+            <hr>
           </div>
-          <hr>
-          
-          <button type="submit" class="btn btn-dark">Enviar</button>
-          </form>
+        </div>
+
+        <!-- BOTON MODAL MEDIOS DE PAGO -->
+
+        <div>
+          <h4>Forma de pago</h4>
+          <p id="pago-selected">No ha seleccionado</p>
+          <div>
+
           </div>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="btn-select"
+            data-bs-target="#exampleModal">
+            Seleccionar
+          </button>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><b>Forma de pago</b></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <input type="radio" id="credit-card" value="credit" name="pago">
+                <label for="credit">Tarjeta de Credito</label>
+                <hr>
+                <div class="contenido">
+                  <label for="numero-t">Numero de tarjeta</label>
+                  <input type="text" name="numero-t" id="num-tarjeta" minlength="16" maxlength="16" class="form-control"
+                    required>
+                </div>
+                <div class="contenido">
+                  <label for="codigo">Codigo de seguridad</label>
+                  <input type="text" minlength="3" maxlength="3" id="cod-seguridad" name="codigo" class="form-control"
+                    required>
+                </div>
+                <div class="contenido">
+                  <label for="vencimiento">Vencimiento (MM/AA)</label>
+                  <input type="text" minlength="5" maxlength="5" id="vencim" name="vencimiento" class="form-control"
+                    required>
+                </div>
+                <hr>
+                <input type="radio" id="transf" value="transferencia" name="pago">
+                <label for="transferencia">Transferencia bancaria</label>
+                <hr>
+                <div class="contenido">
+                  <label for="cuenta">Número de cuenta</label>
+                  <input type="text" id="num-cuenta" name="cuenta" class="form-control" minlength="14" maxlength="14"
+                    required>
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr>
+        <!--BOTON FINALIZAR COMPRA-->
+        <div class="alert alert-success alert-dismissible" role="alert" id="alert-success" hidden> ¡Has comprado con
+          éxito!</div>
+        <button type="submit" id="btn-finalizar-compra" class="btn btn-dark">Finalizar compra</button>
+      </form>
+    </div>
     </div>
   </main>
   <footer class="text-muted">

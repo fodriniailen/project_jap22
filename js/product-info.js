@@ -1,19 +1,19 @@
 
-function setProdID(id){
-    localStorage.setItem("prodID", id);
-    window.location = 'product-info.html';
+function setProdID(id) {
+  localStorage.setItem("prodID", id);
+  window.location = 'product-info.html';
 }
 
 let commentsArray = [];
 let currentProduct = [];
-let productosRelacionados="";
+let productosRelacionados = "";
 
 
-function showProductsList(){
-    let htmlContentToAppend = "";
-    {
-        
-    htmlContentToAppend +=  `
+function showProductsList() {
+  let htmlContentToAppend = "";
+  {
+
+    htmlContentToAppend += `
     <br> 
 
     
@@ -63,20 +63,20 @@ function showProductsList(){
       `
 
     document.getElementById("div-product-info").innerHTML = htmlContentToAppend;
-    }
+  }
 
 }
 
 
- function showComments(){
-    let htmlContentToAppend = "";
-    if(commentsArray.length==0){
-        document.getElementById("comment-container").innerHTML= `
+function showComments() {
+  let htmlContentToAppend = "";
+  if (commentsArray.length == 0) {
+    document.getElementById("comment-container").innerHTML = `
         <h5> No hay comentarios sobre este producto</h5>
         `
-    }else{
-    for (let comment of commentsArray){
-        htmlContentToAppend += `
+  } else {
+    for (let comment of commentsArray) {
+      htmlContentToAppend += `
         
         <p><b>${comment.user}</b> | ${comment.dateTime} | <i>Puntuación:${comment.score}</i></p> 
         <p>${comment.description}</p>
@@ -85,20 +85,20 @@ function showProductsList(){
 
         `
 
-        document.getElementById("comments-container").innerHTML = htmlContentToAppend;
-    
-    }
-}
- }
+      document.getElementById("comments-container").innerHTML = htmlContentToAppend;
 
- function showRelatedProducts(){
-    let htmlContentToAppend ="";
-for (let i = 0; i < product.relatedProducts.length; i++) {
-        
-productosRelacionados=product.relatedProducts[i];
-console.log(productosRelacionados)
-    htmlContentToAppend += 
-    `
+    }
+  }
+}
+
+function showRelatedProducts() {
+  let htmlContentToAppend = "";
+  for (let i = 0; i < product.relatedProducts.length; i++) {
+
+    productosRelacionados = product.relatedProducts[i];
+    console.log(productosRelacionados)
+    htmlContentToAppend +=
+      `
     
     <div id="prod-relacionados">
     <div onclick="setProdID(${productosRelacionados.id})">
@@ -114,49 +114,49 @@ console.log(productosRelacionados)
     
     `
     document.getElementById("productos-relacionados").innerHTML = htmlContentToAppend;
+  }
 }
- }
 
 
 
 
-document.addEventListener("DOMContentLoaded", function(e){
-    getJSONData(PRODUCT_INFO_URL).then(function(resultObj){
-        
-        if (resultObj.status === "ok")
-        currentProduct = resultObj.data;
-        {
-           product = resultObj.data;
-           console.log(product);
-           showProductsList(product) ;
-        }
-        showProductsList()
-    })
+document.addEventListener("DOMContentLoaded", function (e) {
+  getJSONData(PRODUCT_INFO_URL).then(function (resultObj) {
+
+    if (resultObj.status === "ok")
+      currentProduct = resultObj.data;
+    {
+      product = resultObj.data;
+      console.log(product);
+      showProductsList(product);
+    }
+    showProductsList()
+  })
 });
 
-document.addEventListener("DOMContentLoaded", function (e){
-    e.preventDefault()
-    getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(resultObj){
-        if (resultObj.status === "ok")
-        commentsArray = resultObj.data;
-        console.log(commentsArray)
-        {
-            comments = resultObj.data;
-            showComments();
-        }
-        showComments()
-    })
+document.addEventListener("DOMContentLoaded", function (e) {
+  e.preventDefault()
+  getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (resultObj) {
+    if (resultObj.status === "ok")
+      commentsArray = resultObj.data;
+    console.log(commentsArray)
+    {
+      comments = resultObj.data;
+      showComments();
+    }
+    showComments()
+  })
 })
 
-document.addEventListener("DOMContentLoaded", function(e){
-    getJSONData(PRODUCT_INFO_URL).then(function(resultObj){
-        
-        if (resultObj.status === "ok")
-        currentProduct = resultObj.data;
-        {
-           product = resultObj.data;
-        }
-       showRelatedProducts()
-    })
+document.addEventListener("DOMContentLoaded", function (e) {
+  getJSONData(PRODUCT_INFO_URL).then(function (resultObj) {
+
+    if (resultObj.status === "ok")
+      currentProduct = resultObj.data;
+    {
+      product = resultObj.data;
+    }
+    showRelatedProducts()
+  })
 });
- 
+
